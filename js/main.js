@@ -2,6 +2,12 @@
 
 const music = document.getElementById("bgMusic");
 
+// Ensure audio is paused and reset on page load
+if(music){
+	music.pause();
+	music.currentTime = 0;
+}
+
 document.getElementById("openInvite").addEventListener("click", ()=>{
 	document.getElementById("curtain").classList.add("open");
 
@@ -32,3 +38,13 @@ if(musicBtn){
 		}
 	});
 }
+
+// Pause music when clicking location links
+const locationLinks = document.querySelectorAll("a[href*='maps.app.goo.gl']");
+locationLinks.forEach(link => {
+	link.addEventListener("click", ()=>{
+		if(music && !music.paused){
+			music.pause();
+		}
+	});
+});
